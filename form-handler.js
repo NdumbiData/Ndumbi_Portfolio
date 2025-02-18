@@ -1,23 +1,18 @@
-// Ensure the script runs after the page is fully loaded
-document.addEventListener("DOMContentLoaded", function () {
-    // Initialize EmailJS with your public key
-    emailjs.init("mGLDYfY5h5KZnJ-Y4"); // Replace with your actual public key
-  
-    // Attach the form submit event handler
-    document.getElementById("contact-form").addEventListener("submit", function (event) {
-      event.preventDefault(); // Prevent default form submission
-  
-      // Send the form data using EmailJS
-      emailjs.sendForm("service_l8d5xsp", "template_1kwpzhc", this)
-        .then(function (response) {
-          alert("✅ Message sent successfully!"); // Success message
-          console.log("Success:", response);
-          document.getElementById("contact-form").reset(); // Reset form fields after submission
-        })
-        .catch(function (error) {
-          alert("❌ Failed to send message. Check the console for errors.");
-          console.error("Error:", error);
+// Initialize EmailJS with your public key
+emailjs.init('mGLDYfY5h5KZnJ-Y4'); // Replace with your public key
+
+// Add event listener to the form
+document.getElementById('contact-form').addEventListener('submit', function(event) {
+    event.preventDefault();  // Prevent the default form submission (page reload)
+
+    // Send the form data using EmailJS
+    emailjs.sendForm('service_l8d5xsp', 'template_1kwpzhc', this) // Use your service and template IDs
+        .then(function(response) {
+            console.log('Success!', response);
+            alert('Your message has been sent successfully!');
+            document.getElementById('contact-form').reset(); // Optionally reset the form after submission
+        }, function(error) {
+            console.log('Failed...', error);
+            alert('There was an error sending your message. Please try again later.');
         });
-    });
-  });
-  
+});
