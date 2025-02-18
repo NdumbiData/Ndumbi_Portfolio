@@ -1,18 +1,23 @@
-// Initialize EmailJS with your public key
-emailjs.init('mGLDYfY5h5KZnJ-Y4'); // Replace with your public key
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize EmailJS with your User ID
+    emailjs.init('DZ1FugUiBAROGl6Zd');
 
-// Add event listener to the form
-document.getElementById('contact-form').addEventListener('submit', function(event) {
-    event.preventDefault();  // Prevent the default form submission (page reload)
+    // Get the form element
+    const form = document.getElementById('contact-form');
 
-    // Send the form data using EmailJS
-    emailjs.sendForm('service_l8d5xsp', 'template_1kwpzhc', this) // Use your service and template IDs
-        .then(function(response) {
-            console.log('Success!', response);
-            alert('Your message has been sent successfully!');
-            document.getElementById('contact-form').reset(); // Optionally reset the form after submission
-        }, function(error) {
-            console.log('Failed...', error);
-            alert('There was an error sending your message. Please try again later.');
-        });
+    // Add an event listener for the form submission
+    form.addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent the default form submission
+
+        // Send the form data using EmailJS
+        emailjs.sendForm('ervice_l8d5xsp', 'template_1kwpzhc', form)
+            .then(function(response) {
+                console.log('SUCCESS!', response.status, response.text);
+                alert('Your message has been sent successfully!');
+                form.reset(); // Reset the form after successful submission
+            }, function(error) {
+                console.log('FAILED...', error);
+                alert('Failed to send the message, please try again.');
+            });
+    });
 });
